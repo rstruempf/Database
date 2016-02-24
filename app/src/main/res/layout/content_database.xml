@@ -108,4 +108,23 @@
             android:id="@+id/buttonDelete"
             android:onClick="removeProduct" />
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update"
+            android:id="@+id/buttonUpdate" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete All"
+            android:id="@+id/buttonDeleteAll" />
+    </LinearLayout>
 </LinearLayout>
