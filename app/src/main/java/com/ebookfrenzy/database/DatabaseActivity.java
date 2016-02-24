@@ -58,6 +58,11 @@ public class DatabaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Safely get product quantity
+     *
+     * @return Quantity or -1 if invalid
+     */
     private int getQuantity() {
         try {
             return Integer.parseInt(quantityBox.getText().toString());
@@ -67,6 +72,11 @@ public class DatabaseActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Add a new product
+     *
+     * @param view Unused
+     */
     public void newProduct(View view) {
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
 
@@ -93,8 +103,14 @@ public class DatabaseActivity extends AppCompatActivity {
         dbHandler.addProduct(product);
         productBox.setText("");
         quantityBox.setText("");
+        idView.setText("Product added");
     }
 
+    /**
+     * Lookup a product by product name
+     *
+     * @param view Unused
+     */
     public void lookupProduct(View view) {
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
 
@@ -110,6 +126,11 @@ public class DatabaseActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Remove a product
+     *
+     * @param view Unused
+     */
     public void removeProduct(View view) {
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
 
@@ -123,6 +144,60 @@ public class DatabaseActivity extends AppCompatActivity {
         else {
             idView.setText("No Match Found");
         }
+    }
+
+    /**
+     * Update a product
+     *
+     * @param view Unused
+     */
+    public void updateProduct(View view) {
+        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
+
+        String productName = productBox.getText().toString();
+        if (productName.length() < 1) {
+            idView.setText("Name required");
+            return;
+        }
+
+        Product product = dbHandler.findProduct(productName);
+        if (product == null) {
+            idView.setText("Product not found");
+            return;
+        }
+
+        int quantity = getQuantity();
+
+        if (quantity <= 0) {
+            idView.setText("Quantity required");
+            return;
+        }
+
+        if (quantity == product.getQuantity()) {
+            idView.setText("Nothing changed");
+            return;
+        }
+
+        product.setQuantity(quantity);
+
+        dbHandler.updateProduct(product);
+        productBox.setText("");
+        quantityBox.setText("");
+        idView.setText("Product updated");
+    }
+
+    /**
+     * Delete all products
+     *
+     * @param view Unused
+     */
+    public void delallProducts(View view) {
+        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
+
+        int result = dbHandler.deleteAllProducts();
+        productBox.setText("");
+        quantityBox.setText("");
+        idView.setText("" + result + " records deleted");
     }
 
 }

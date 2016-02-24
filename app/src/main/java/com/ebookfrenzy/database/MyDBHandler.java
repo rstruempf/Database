@@ -111,4 +111,31 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
         return result;
     }
+
+    /**
+     * Update product
+     *
+     * @param product Product to update
+     */
+    public void updateProduct(Product product) {
+        // Alt: use this where clause and where params = null
+        //String whereClause = COLUMN_ID + "=" + product.getID();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_PRODUCTNAME, product.getProductName());
+        values.put(COLUMN_QUANTITY, product.getQuantity());
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.update(TABLE_PRODUCTS, values, COLUMN_ID + " = ?",
+                    new String[] { String.valueOf(product.getID()) });
+        db.close();
+    }
+
+    /**
+     * Delete all records from product database
+     */
+    public int deleteAllProducts() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_PRODUCTS, "1", null);
+    }
 }

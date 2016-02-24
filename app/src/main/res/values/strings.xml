@@ -9,4 +9,6 @@
     <string name="find_button">Find</string>
     <string name="delete_button">Delete</string>
     <string name="no_match">No Match Found</string>
+    <string name="update_button">Update</string>
+    <string name="delall_button">Delete All</string>
 </resources>
