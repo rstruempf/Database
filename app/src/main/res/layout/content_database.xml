@@ -91,18 +91,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add_button"
-            android:id="@+id/buttonAdd" />
+            android:id="@+id/buttonAdd"
+            android:onClick="newProduct" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/find_button"
-            android:id="@+id/buttonFind" />
+            android:id="@+id/buttonFind"
+            android:onClick="lookupProduct" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/delete_button"
-            android:id="@+id/buttonDelete" />
+            android:id="@+id/buttonDelete"
+            android:onClick="removeProduct" />
     </LinearLayout>
 </LinearLayout>
